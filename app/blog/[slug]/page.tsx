@@ -12,6 +12,7 @@ import {
   PostTitle,
 } from '../../../components/blog-parts'
 import SocialButtons from '../../../components/social-buttons'
+import LikeButton from '../../../components/like-button'
 import styles from '../../../styles/blog.module.scss'
 import { getBlogLink } from '../../../lib/blog-helpers'
 import {
@@ -80,6 +81,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
                   id={post.Slug}
                 />
               )}
+              <LikeButton slug={post.Slug} like={post.Like} />
             </footer>
           </div>
         </div>

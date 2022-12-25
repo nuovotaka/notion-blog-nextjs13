@@ -506,7 +506,7 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
 
       if (blockObject.video.type === 'external') {
         video.External = { Url: blockObject.video.external.url }
-      }
+      } 
 
       block.Video = video
       break
@@ -811,6 +811,7 @@ function _buildPost(pageObject: responses.PageObject): Post {
     OGImage:
       prop.OGImage.files.length > 0 ? prop.OGImage.files[0].file.url : null,
     Rank: prop.Rank.number,
+    Like: prop.Like.number,
   }
 
   return post
@@ -876,4 +877,19 @@ function _buildRichText(richTextObject: responses.RichTextObject): RichText {
   }
 
   return richText
+}
+
+export async function incrementLikes(post:Post) {
+  const result = await client.pages.update({
+    page_id: post.PageId,
+    properties: {
+      'Like': (post.Like || 0) + 1,
+    },
+  })
+
+  if (!result) {
+    return null
+  }
+
+  return _buildPost(result)
 }
