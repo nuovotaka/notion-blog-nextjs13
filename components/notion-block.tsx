@@ -305,13 +305,15 @@ const ToDoItems = ({ blocks }) =>
     .filter((b: interfaces.Block) => b.Type === 'to_do')
     .map((listItem: interfaces.Block) => (
       <div key={`to-do-item-${listItem.Id}`}>
-        <input type="checkbox" defaultChecked={listItem.ToDo.Checked} />
+        <input type="checkbox" readOnly checked={listItem.ToDo.Checked} />
+        <span>
         {listItem.ToDo.RichTexts.map((richText: interfaces.RichText, i: number) => (
           <RichText
             richText={richText}
             key={`to-do-item-${listItem.Id}-${i}`}
           />
         ))}
+        </span>
         {listItem.HasChildren ? (
           <ul>
             <ListBlocks blocks={listItem.ToDo.Children} />
