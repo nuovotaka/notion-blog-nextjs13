@@ -24,6 +24,7 @@ import {
   getAllTags,
   getAllBlocksByBlockId,
 } from '../../../lib/notion/client'
+import TocLink from '../../../components/toc'
 
 export const revalidate = 30
 export const dynamicParams = false
@@ -94,6 +95,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest posts" posts={recentPosts} />
           <BlogTagLink heading="Categories" tags={tags} />
+          <TocLink blocks={blocks}/>
         </div>
       </div>
     </>
