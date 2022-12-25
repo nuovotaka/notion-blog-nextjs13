@@ -1,11 +1,11 @@
-English | [日本語](README.ja.md)
+English | [日本語](README.ja.md) | [notion-blog 日本語](README.ja+.md)
 
 # easy-notion-blog
 
 [![GitHub stars](https://img.shields.io/github/stars/otoyo/easy-notion-blog)](https://github.com/otoyo/easy-notion-blog/stargazers)
 [![GitHub license](https://img.shields.io/github/license/otoyo/easy-notion-blog)](https://github.com/otoyo/easy-notion-blog/blob/master/LICENSE)
 
-<img src="https://user-images.githubusercontent.com/1063435/201917958-432ebbcb-6960-4106-8fd2-9ddcd7539781.jpg" width="480">
+<img src="https://user-images.githubusercontent.com/1063435/155871688-aeb3a7ea-28cb-4b84-bcde-eafc7a2a859a.png" width="480">
 easy-notion-blog is a starter-kit for Notion Blog.  
 It helps you to start your Notion Blog easily and rapidly.
 
@@ -37,8 +37,8 @@ It helps you to start your Notion Blog easily and rapidly.
 1. **Star this repo** :wink:
 2. Duplicate [the template](https://www.notion.so/otoyo/158bd90116004cd19aca26ad88cb5c07?v=a20acca876c2428380e5a2a33db233ed) into your Notion.
 3. Note the part of URL `https://notion.so/your-account/<HERE>?v=xxxx` as `DATABASE_ID`
-    * ex) `158bd90116004cd19aca26ad88cb5c07`
-    * :warning: **CAUTION:** `?v=NOT_THIS_VALUE`. Use ahead strings.
+   - ex) `158bd90116004cd19aca26ad88cb5c07`
+   - :warning: **CAUTION:** `?v=NOT_THIS_VALUE`. Use ahead strings.
 4. [Create an integration](https://developers.notion.com/docs#step-1-create-an-integration) and note "Internal Integration Token" as `NOTION_API_SECRET`
 5. [Share a database with your integration](https://developers.notion.com/docs#step-1-create-an-integration) at the Notion database page
 6. Go to [vercel.com](https://vercel.com/) and log-in
@@ -74,9 +74,6 @@ DATABASE_ID=<YOUR_DATABASE_ID>
 yarn install
 yarn dev
 ```
-
-In the development environment, non-published posts are also displayed to check their appearance.  
-But posts without valid `Slug` won't be displayed.
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 5. Press `Ctrl+C` in the terminal to stop.

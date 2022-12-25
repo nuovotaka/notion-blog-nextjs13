@@ -1,18 +1,18 @@
-[English](README.md) | 日本語
+[English](README.md) | 日本語 | [notion-blog 日本語](README.ja+.md)
 
 # easy-notion-blog
 
 [![GitHub stars](https://img.shields.io/github/stars/otoyo/easy-notion-blog)](https://github.com/otoyo/easy-notion-blog/stargazers)
 [![GitHub license](https://img.shields.io/github/license/otoyo/easy-notion-blog)](https://github.com/otoyo/easy-notion-blog/blob/master/LICENSE)
 
-<img src="https://user-images.githubusercontent.com/1063435/201917958-432ebbcb-6960-4106-8fd2-9ddcd7539781.jpg" width="480">
+<img src="https://user-images.githubusercontent.com/1063435/155871688-aeb3a7ea-28cb-4b84-bcde-eafc7a2a859a.png" width="480">
 
 easy-notion-blog を使えばあっという間に Notion Blog を始めることができます。
 
 - :rocket: ページの読み込みが**爆速**
-- :pencil: **自分のNotionで**ブログが書ける
+- :pencil: **自分の Notion で**ブログが書ける
 - :hammer_and_wrench: ブログの見た目を**自分好みにカスタマイズ可能**
-- :white_check_mark: **Notion 公式API**を使っているので安心
+- :white_check_mark: **Notion 公式 API**を使っているので安心
 
 ## スクリーンショット
 
@@ -20,7 +20,7 @@ easy-notion-blog を使えばあっという間に Notion Blog を始めるこ�
 
 <img src="https://user-images.githubusercontent.com/1063435/201293737-63c0d504-d34b-4500-98ab-808f4d2e89f3.png" width="600">
 
-### :camera_flash: Notion側
+### :camera_flash: Notion 側
 
 <img src="https://user-images.githubusercontent.com/1063435/201301619-54cf07da-e638-4751-b56c-7115ed5d4eb0.png" width="600">
 
@@ -37,8 +37,8 @@ easy-notion-blog を使えばあっという間に Notion Blog を始めるこ�
 1. このリポジトリを**スターします** :wink:
 2. [テンプレート](https://www.notion.so/otoyo/158bd90116004cd19aca26ad88cb5c07?v=a20acca876c2428380e5a2a33db233ed) を自分の Notion へ複製します
 3. 複製したページの URL の `https://notion.so/your-account/<ココ>?v=xxxx` を `DATABASE_ID` としてメモします
-    * 例) `158bd90116004cd19aca26ad88cb5c07`
-    * :warning: **注意:** `?v=ここではありません`。`?v=` の前です。
+   - 例) `158bd90116004cd19aca26ad88cb5c07`
+   - :warning: **注意:** `?v=ここではありません`。`?v=` の前です。
 4. [Create an integration](https://developers.notion.com/docs#step-1-create-an-integration) からインテグレーションを作成し "Internal Integration Token" を `NOTION_API_SECRET` としてメモします
 5. 複製したページを再度開き [Share a database with your integration](https://developers.notion.com/docs#step-1-create-an-integration) の手順でインテグレーションにデータベースを共有します
 6. [vercel.com](https://vercel.com/) にログインします
