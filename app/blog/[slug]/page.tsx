@@ -61,7 +61,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
       <GoogleAnalytics pageTitle={post.Title} />
       <div className={styles.container}>
         <div className={styles.mainContent}>
-          <div className={styles.post}>
+          <div className={styles.blogpost}>
             <PostDate post={post} />
             <PostTags post={post} />
             <PostTitle post={post} enableLink={false} />
