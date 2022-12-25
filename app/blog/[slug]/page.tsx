@@ -26,7 +26,7 @@ import {
 } from '../../../lib/notion/client'
 import TocLink from '../../../components/toc'
 
-// export const revalidate = 30
+export const revalidate = 30
 export const dynamicParams = false
 
 export async function generateStaticParams() {
@@ -36,8 +36,6 @@ export async function generateStaticParams() {
 
 const BlogSlugPage = async ({ params: { slug } }) => {
   const post = await getPostBySlug(slug)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const revalidate = 30
 
   if (!post) {
     console.log(`Failed to find post for slug: ${slug}`)
