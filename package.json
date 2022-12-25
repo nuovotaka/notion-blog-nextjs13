@@ -28,14 +28,17 @@
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
     "react-katex": "^3.0.1",
     "react-share": "^4.4.1",
+    "react-toggle-dark-mode": "^1.1.1",
     "react-twitter-embed": "^4.0.4",
     "react-youtube": "^10.1.0",
     "sass": "^1.57.1",
     "shell-quote": "^1.7.4",
     "swr": "^2.0.0",
-    "ua-parser-js": "^1.0.32"
+    "ua-parser-js": "^1.0.32",
+    "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
