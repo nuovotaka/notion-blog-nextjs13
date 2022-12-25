@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../app/server-constants'
 import GoogleAnalytics from '../../../../components/google-analytics'
+import { PrevPageLink } from '../../../../components/prevpagelink'
 import {
   getRankedPosts,
   getPostsBefore,
@@ -18,6 +19,7 @@ import {
   PostTitle,
 } from '../../../../components/blog-parts'
 import styles from '../../../../styles/blog.module.scss'
+import Mystyles from '../../../../styles/mystyles.module.scss'
 
 export const revalidate = 3600
 
@@ -59,7 +61,10 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
           })}
 
           <footer>
-            <NextPageLink firstPost={firstPost} posts={posts} />
+            <div className={Mystyles.PageLinkContainer}>
+              <PrevPageLink />
+              <NextPageLink firstPost={firstPost} posts={posts} />
+            </div>
           </footer>
         </div>
 

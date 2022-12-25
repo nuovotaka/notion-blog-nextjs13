@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../../app/server-constants'
 import GoogleAnalytics from '../../../../../../components/google-analytics'
+import { PrevPageLink } from '../../../../../../components/prevpagelink'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -19,6 +20,7 @@ import {
   getAllTags,
 } from '../../../../../../lib/notion/client'
 import styles from '../../../../../../styles/blog.module.scss'
+import Mystyles from '../../../../../../styles/mystyles.module.scss'
 
 export const revalidate = 3600
 
@@ -62,7 +64,10 @@ const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedD
           })}
 
           <footer>
-            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+            <div className={Mystyles.PageLinkContainer}>
+              <PrevPageLink />
+              <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+            </div>
           </footer>
         </div>
 
