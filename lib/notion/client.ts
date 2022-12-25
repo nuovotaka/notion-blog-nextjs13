@@ -3,6 +3,7 @@ import * as responses from './responses'
 import {
   Post,
   Block,
+  ChildPage,
   Paragraph,
   Heading1,
   Heading2,
@@ -407,6 +408,8 @@ export async function getAllBlocksByBlockId(blockId: string): Promise<Block[]> {
       block.SyncedBlock.Children = await _getSyncedBlockChildren(block)
     } else if (block.Type === 'toggle') {
       block.Toggle.Children = await getAllBlocksByBlockId(block.Id)
+    } else if (block.Type === 'child_page' && block.HasChildren) {
+      block.ChildPage.Children = await getAllBlocksByBlockId(block.Id)
     }
   }
 
@@ -429,6 +432,14 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
   }
 
   switch (blockObject.type) {
+    case 'child_page':
+      const childpage: ChildPage = {
+        Title: blockObject.child_page.title,
+        Children: [],
+      }
+
+      block.ChildPage = childpage
+      break
     case 'paragraph':
       const paragraph: Paragraph = {
         RichTexts: blockObject.paragraph.rich_text.map(_buildRichText),

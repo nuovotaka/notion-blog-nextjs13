@@ -14,6 +14,7 @@ export interface Block {
   Type: string
   HasChildren: boolean
 
+  ChildPage?: ChildPage
   Paragraph?: Paragraph
   Heading1?: Heading1
   Heading2?: Heading2
@@ -37,6 +38,10 @@ export interface Block {
   TableOfContents?: TableOfContents
 }
 
+export interface ChildPage {
+  Title: string
+  Children: Block[]
+}
 export interface Paragraph {
   RichTexts: RichText[]
   Color: string
