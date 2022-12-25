@@ -19,7 +19,7 @@ import {
   getFirstPostByTag,
   getAllTags,
 } from '../../../../../../lib/notion/client'
-import styles from '../../../../../../styles/blog.module.css'
+import styles from '../../../../../../styles/blog.module.scss'
 
 export const revalidate = 3600
 

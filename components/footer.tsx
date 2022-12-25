@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import styles from '../styles/footer.module.css'
+import styles from '../styles/footer.module.scss'
 
 const Footer = () => (
   <footer className={styles.footer}>

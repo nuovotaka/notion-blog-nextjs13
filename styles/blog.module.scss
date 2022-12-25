@@ -1,0 +1,196 @@
+@use "mixin" as m;
+
+.container {
+  display: flex;
+  @include m.mq(enb) {
+    display: block;
+  }
+  justify-content: space-between;
+}
+
+.mainContent {
+  width: 60%;
+  @include m.mq(enb) {
+    width: 100%;
+  }
+  header {
+    padding: 0 0 20px;
+    text-align: center;
+  }
+
+  footer {
+    border-top: 1px dashed #888;
+    margin: 0 auto;
+    @include m.mq(enb) {
+      margin: 0 auto 40px;
+    }
+    padding: 40px 0 0;
+  }
+}
+
+.subContent {
+  width: 35%;
+  @include m.mq(enb) {
+    width: 100%;
+  }
+}
+
+.post {
+  width: 90%;
+  margin: 0 auto 40px;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px gray;
+  position: relative;
+  overflow: hidden;
+
+  :global(h3) {
+    margin: 0;
+    color: var(--fg);
+    margin-top: 5px;
+
+    a:before {
+      content: "";
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 50%;
+    }
+  }
+
+  :global(h4),
+  :global(h5),
+  :global(h6) {
+    margin: 1.8rem 0 0.8rem;
+    color: var(--fg);
+    font-size: 1.1rem;
+
+    &:after {
+      color: var(--accents-1);
+      font-size: 0.9rem;
+      content: '▼';
+      padding-left: 0.2rem;
+    }
+  }
+
+  :global(p) {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+    min-height: 1.8rem;
+  }
+
+  :global(video),
+  :global(img) {
+    max-width: 100%;
+    display: inline-block;
+  }
+
+  :global(blockquote) {
+    margin: 0.6rem 0;
+    padding: 0 0.9rem;
+    border-left: 3px solid var(--fg);
+    font-size: 1rem;
+    line-height: 1.8rem;
+  }
+
+  table {
+    margin: 1rem 0;
+  }
+
+  ul,
+  ol {
+    font-size: 1rem;
+  }
+
+  p code {
+    color: var(--p-code-color);
+    padding: 0.25rem;
+  }
+
+  footer {
+    padding: 0;
+    border: 0;
+  }
+}
+
+@media screen and (hover: hover) {
+  .post:hover {
+    box-shadow: 0px 0px 3px gray;
+    transition: 0.2s ease-in-out;
+  }
+}
+
+@media screen and (hover: none) {
+  .post:active {
+    box-shadow: 0px 0px 3px gray;
+    transition: 0.2s ease-in-out;
+  }
+}
+
+.blogpost {
+  width: 90%;
+  margin: 0 auto 40px;
+
+  :global(h3) {
+    margin: 0;
+    color: var(--fg);
+    margin-top: 5px;
+  }
+
+  :global(h4),
+  :global(h5),
+  :global(h6) {
+    margin: 1.8rem 0 0.8rem;
+    color: var(--fg);
+    font-size: 1.1rem;
+
+    &:after {
+      color: var(--accents-1);
+      font-size: 0.9rem;
+      content: '▼';
+      padding-left: 0.2rem;
+    }
+  }
+
+  :global(p) {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+    min-height: 1.8rem;
+  }
+
+  :global(video),
+  :global(img) {
+    max-width: 100%;
+    display: inline-block;
+  }
+
+  :global(blockquote) {
+    margin: 0.6rem 0;
+    padding: 0 0.9rem;
+    border-left: 3px solid var(--fg);
+    font-size: 1rem;
+    line-height: 1.8rem;
+  }
+
+  table {
+    margin: 1rem 0;
+  }
+
+  ul,
+  ol {
+    font-size: 1rem;
+  }
+
+  p code {
+    color: var(--p-code-color);
+    padding: 0.25rem;
+  }
+
+  footer {
+    padding: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

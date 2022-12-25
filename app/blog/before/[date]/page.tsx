@@ -18,7 +18,7 @@ import {
   PostTitle,
   ReadMoreLink,
 } from '../../../../components/blog-parts'
-import styles from '../../../../styles/blog.module.css'
+import styles from '../../../../styles/blog.module.scss'
 
 export const revalidate = 3600
 

@@ -4,7 +4,7 @@ import React from 'react'
 import YouTube, { YouTubeProps } from 'react-youtube'
 import { isYouTubeURL, parseYouTubeVideoId } from '../../lib/blog-helpers'
 
-import styles from '../../styles/notion-block.module.css'
+import styles from '../../styles/notion-block.module.scss'
 
 const Video = ({ block }) => {
   let url: URL

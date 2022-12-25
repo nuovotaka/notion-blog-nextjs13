@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation"
 import Link from 'next/link'
 import { NEXT_PUBLIC_SITE_TITLE } from '../app/server-constants'
-import styles from '../styles/header.module.css'
+import styles from '../styles/header.module.scss'
 
 interface NavItem {
   label: string

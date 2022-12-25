@@ -1,0 +1,91 @@
+@use "mixin" as m;
+
+.font-bold {
+  font-weight: bold;
+}
+
+.PageLinkContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomNavLink {
+  display: inline-block;
+  @include m.mq(tab) {
+    display: none;
+  }
+}
+
+.footer {
+  display: block;
+  text-align: center;
+  @include m.mq(sp) {
+    margin-bottom: 60px;
+  }
+
+  ul {
+    list-style: none;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    border-top: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    z-index: 30;
+    opacity: 90%;
+
+    li {
+      display: inline-block;
+      padding-top: 5px;
+      width: 25%;
+    }
+  }
+}
+
+.subtableOfContents {
+  display: none;
+  @include m.mq(tab) {
+    display: block;
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  >a {
+    display: block;
+    color: inherit;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+    text-decoration: underline;
+
+    &:hover {
+      background: rgba(241, 241, 239, 1) !important;
+    }
+
+    &.indent-1 {
+      padding-left: 1.5rem;
+    }
+
+    &.indent-2 {
+      padding-left: 3rem;
+    }
+  }
+}
+
+.like {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.likebutton {
+  background-color: var(--bg);
+  border: none;
+}
