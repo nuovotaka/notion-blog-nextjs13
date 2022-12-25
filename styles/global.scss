@@ -20,6 +20,7 @@
   --accents-1: #ff5722;
   --accents-2: #ee3901;
   --accents-3: #666;
+  --accents-4: #303aa5;
   --geist-foreground: #000;
   --geist-success: #690;
   --radius: 4px;
@@ -66,6 +67,8 @@ body {
     --bg: #333;
     --fg: #fff;
     --accents-3: #ddd;
+    --accents-4: #333;
+    --active-color: #aaa;
     --listitem-color: #ddd;
     --bookmark-border: rgba(255, 255, 255, 0.608);
   }
@@ -74,6 +77,8 @@ body {
     --bg: #fff;
     --fg: #333;
     --accents-3: #666;
+    --accents-4: #303aa5;
+    --active-color: #fff;
     --listitem-color: #222;
     --bookmark-border: rgba(55, 53, 47, 0.16);
   }
@@ -106,9 +111,11 @@ h1 {
   margin: 0;
   color: var(--fg);
   font-size: 2rem;
+
   @include m.mq(enb) {
     font-size: 1.6rem;
   }
+
   font-weight: 700;
 }
 
@@ -117,9 +124,11 @@ h3 {
   margin: 0;
   color: var(--fg);
   font-size: 1.2rem;
+
   @include m.mq(enb) {
     font-size: 1.15rem;
   }
+
   font-weight: 700;
 }
 
