@@ -16,7 +16,7 @@
     }
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.2",
+    "@notionhq/client": "^2.2.3",
     "axios": "^1.2.1",
     "got": "^12.5.3",
     "mermaid": "^9.3.0",
