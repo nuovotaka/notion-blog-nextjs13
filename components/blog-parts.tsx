@@ -83,7 +83,7 @@ export const NextPageLink = ({ firstPost, posts, tag = '' }) => {
             : getBeforeLink(lastPost.Date)
         }
       >
-        Next page ＞
+        Older page →
       </Link>
     </div>
   )
