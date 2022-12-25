@@ -10,7 +10,6 @@ import {
   PostExcerpt,
   PostTags,
   PostTitle,
-  ReadMoreLink,
 } from '../../../../../../components/blog-parts'
 import {
   getPosts,
@@ -57,7 +56,7 @@ const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedD
                 <PostTags post={post} />
                 <PostTitle post={post} />
                 <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
+                {/* <ReadMoreLink post={post} /> */}
               </div>
             )
           })}

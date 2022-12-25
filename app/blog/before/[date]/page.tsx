@@ -16,7 +16,6 @@ import {
   PostExcerpt,
   PostTags,
   PostTitle,
-  ReadMoreLink,
 } from '../../../../components/blog-parts'
 import styles from '../../../../styles/blog.module.scss'
 
@@ -54,7 +53,7 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
                 <PostTags post={post} />
                 <PostTitle post={post} />
                 <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
+                {/* <ReadMoreLink post={post} /> */}
               </div>
             )
           })}
