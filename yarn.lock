@@ -5781,7 +5781,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.8.1, prop-types@^15.8.1:
+prop-types@15.8.1, prop-types@^15.5.0, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5839,6 +5839,13 @@ re2@~1.18.0:
     nan "^2.17.0"
     node-gyp "^9.3.0"
 
+react-codepen-embed@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-codepen-embed/-/react-codepen-embed-1.1.0.tgz#26ec08ca91cdab8f4ec1900f3774a44f69650e82"
+  integrity sha512-ljLrnYh7kJesz+XYVVJuKPgviY8Q3JT0OZu4ASQCavGK8+uvpsILRhPh9xB4YNNCjZTfNQjn4LQXS5OtNNRVIg==
+  dependencies:
+    prop-types "^15.5.0"
+
 react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
@@ -5881,6 +5888,14 @@ react-share@^4.4.1:
   dependencies:
     classnames "^2.3.2"
     jsonp "^0.2.1"
+
+react-spotify-embed@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-spotify-embed/-/react-spotify-embed-1.0.4.tgz#392dcce4d188a9faf7cae0119a201954dbd7692a"
+  integrity sha512-pgDh/K2KlmZ6z+18EHgTfsnZDNeHGsck+VIIbM/bC5qkE57YIwkxaTNMq9CzgB6jXDjjjRgAdU5j8cmNsB8L2w==
+  dependencies:
+    react "^18.2.0"
+    react-dom "^18.2.0"
 
 react-spring@^9.0.0-rc.3:
   version "9.6.1"
