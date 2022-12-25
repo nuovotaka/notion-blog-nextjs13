@@ -31,6 +31,7 @@ export interface Block {
   Toggle?: Toggle
   Embed?: Embed
   Video?: Video
+  Pdf?: Pdf
   Bookmark?: Bookmark
   LinkPreview?: LinkPreview
   Table?: Table
@@ -143,6 +144,14 @@ export interface Toggle {
 
 export interface Embed {
   Url: string
+}
+
+export interface Pdf {
+  Type: string
+  File?: File
+  External?: External
+  Url?: string
+  ExpiryTime?: string
 }
 
 export interface Bookmark {

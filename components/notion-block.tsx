@@ -8,8 +8,9 @@ import Video from './notion-blocks/video'
 import ImageBlock from './notion-blocks/image-block'
 import InlineEquation from './notion-blocks/inline-equation'
 import BlockEquation from './notion-blocks/block-equation'
+import Pdf from './notion-blocks/pdf'
 
-import styles from '../styles/notion-block.module.css'
+import styles from '../styles/notion-block.module.scss'
 
 const RichText = ({ richText }) => {
   let element
@@ -359,6 +360,8 @@ const NotionBlock = ({ block, blocks }) => {
     return <Callout block={block} />
   } else if (block.Type === 'embed') {
     return <Embed block={block} />
+  } else if (block.Type === 'pdf') {
+    return <Pdf block={block} />
   } else if (block.Type === 'bookmark' || block.Type === 'link_preview') {
     return <Bookmark block={block} />
   } else if (block.Type === 'divider') {
