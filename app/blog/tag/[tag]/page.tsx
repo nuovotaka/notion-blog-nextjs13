@@ -52,17 +52,19 @@ const BlogTagPage = async ({ params: { tag: encodedTag } }) => {
             <h2>{tag}</h2>
           </header>
 
-          {posts.map(post => {
-            return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                {/* <ReadMoreLink post={post} /> */}
-              </div>
-            )
-          })}
+          <div className={styles.template}>
+            {posts.map(post => {
+              return (
+                <div className={styles.post} key={post.Slug}>
+                  <PostDate post={post} />
+                  <PostTags post={post} />
+                  <PostTitle post={post} />
+                  <PostExcerpt post={post} />
+                  {/* <ReadMoreLink post={post} /> */}
+                </div>
+              )
+            })}
+          </div>
 
           <footer>
             <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />

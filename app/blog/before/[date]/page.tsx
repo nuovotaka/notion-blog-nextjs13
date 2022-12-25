@@ -48,17 +48,19 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
 
           <NoContents contents={posts} />
 
-          {posts.map(post => {
-            return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                {/* <ReadMoreLink post={post} /> */}
-              </div>
-            )
-          })}
+          <div className={styles.template}>
+            {posts.map(post => {
+              return (
+                <div className={styles.post} key={post.Slug}>
+                  <PostDate post={post} />
+                  <PostTags post={post} />
+                  <PostTitle post={post} />
+                  <PostExcerpt post={post} />
+                  {/* <ReadMoreLink post={post} /> */}
+                </div>
+              )
+            })}
+          </div>
 
           <footer>
             <div className={Mystyles.PageLinkContainer}>
