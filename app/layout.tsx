@@ -10,7 +10,7 @@ const RootLayout = ({
 }: {
   children: React.ReactNode,
 }) => (
-  <html lang="ja">
+  <html lang="ja" prefix="og: https://ogp.me/ns#">
     <body>
       <GoogleADS />
       <div className={styles.container}>
