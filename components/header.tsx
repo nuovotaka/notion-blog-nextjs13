@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <>
       <h1 className={styles.siteheader}>
-        <Link href="/" >
+        <Link href="/blog" >
           {NEXT_PUBLIC_SITE_TITLE}
         </Link>
       </h1>
