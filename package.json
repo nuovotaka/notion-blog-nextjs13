@@ -40,7 +40,8 @@
     "shell-quote": "^1.7.4",
     "swr": "^2.0.0",
     "ua-parser-js": "^1.0.32",
-    "use-dark-mode": "^2.3.1"
+    "use-dark-mode": "^2.3.1",
+    "video-react": "^0.16.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
