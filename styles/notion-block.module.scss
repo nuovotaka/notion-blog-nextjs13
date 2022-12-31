@@ -349,14 +349,8 @@
 }
 
 .video {
-  position: relative;
-  padding-top: 56.25%;
-}
-
-.react-player {
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 100%;
+  aspect-ratio: 16/9;
 }
 
 .spotifyEmbed :first-child {

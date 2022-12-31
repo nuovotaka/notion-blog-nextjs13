@@ -95,6 +95,7 @@ export interface Image {
 
 export interface Video {
   Type: string
+  File?: File
   External?: External
 }
 

@@ -506,7 +506,9 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
 
       if (blockObject.video.type === 'external') {
         video.External = { Url: blockObject.video.external.url }
-      } 
+      } else {
+        video.File = { Url: blockObject.video.file.url }
+      }
 
       block.Video = video
       break
