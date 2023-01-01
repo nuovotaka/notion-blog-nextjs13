@@ -1,48 +1,53 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import got from 'got'
-import { getPostBySlug } from '../../../lib/notion/client'
+// API route sample for OG Image without Vercel
+//
+// 1. Rename this as `[slug].ts` and place under `pages/api/og-image/`
+// 2. Request `/api/og-image/<slug> from front pages
 
-const ApiOgImage = async function(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    res.statusCode = 400
-    res.end()
-    return
-  }
+// import { NextApiRequest, NextApiResponse } from 'next'
+// import got from 'got'
+// import { getPostBySlug } from '../../../lib/notion/client'
 
-  const { slug: slugs } = req.query
+// const ApiOgImage = async function(req: NextApiRequest, res: NextApiResponse) {
+//   if (req.method !== 'GET') {
+//     res.statusCode = 400
+//     res.end()
+//     return
+//   }
 
-  if (!slugs) {
-    res.statusCode = 400
-    res.end()
-    return
-  }
+//   const { slug: slugs } = req.query
 
-  const slug = slugs.toString()
+//   if (!slugs) {
+//     res.statusCode = 400
+//     res.end()
+//     return
+//   }
 
-  try {
-    const post = await getPostBySlug(slug)
-    if (!post) {
-      throw new Error(`post not found. slug: ${slug}`)
-    }
+//   const slug = slugs.toString()
 
-    if (!post.OGImage) {
-      res.statusCode = 404
-      res.end()
-      return
-    }
+//   try {
+//     const post = await getPostBySlug(slug)
+//     if (!post) {
+//       throw new Error(`post not found. slug: ${slug}`)
+//     }
 
-    const { rawBody: image, headers: headers } = await got(post.OGImage)
+//     if (!post.OGImage) {
+//       res.statusCode = 404
+//       res.end()
+//       return
+//     }
 
-    res.setHeader('Content-Type', headers['content-type'])
-    res.setHeader('Cache-Control', 'public, s-maxage=86400, max-age=86400, stale-while-revalidate=86400')
-    res.write(image)
-    res.statusCode = 200
-    res.end()
-  } catch (e) {
-    console.log(e)
-    res.statusCode = 500
-    res.end()
-  }
-}
+//     const { rawBody: image, headers: headers } = await got(post.OGImage)
 
-export default ApiOgImage
+//     res.setHeader('Content-Type', headers['content-type'])
+//     res.setHeader('Cache-Control', 'public, s-maxage=86400, max-age=86400, stale-while-revalidate=86400')
+//     res.write(image)
+//     res.statusCode = 200
+//     res.end()
+//   } catch (e) {
+//     console.log(e)
+//     res.statusCode = 500
+//     res.end()
+//   }
+// }
+
+// export default ApiOgImage
