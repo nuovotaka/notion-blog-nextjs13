@@ -3,7 +3,6 @@ import * as responses from './responses'
 import {
   Post,
   Block,
-  ChildPage,
   Paragraph,
   Heading1,
   Heading2,
@@ -18,7 +17,6 @@ import {
   Callout,
   Embed,
   Video,
-  Pdf,
   Bookmark,
   LinkPreview,
   SyncedBlock,
@@ -33,22 +31,15 @@ import {
   RichText,
   Text,
   Annotation,
-  Mention,
 } from './interfaces'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Client } = require('@notionhq/client')
-import * as blogIndexCache from './blog-index-cache'
 
 const client = new Client({
   auth: NOTION_API_SECRET,
 })
 
 export async function getPosts(pageSize = 10): Promise<Post[]> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts.slice(0, pageSize)
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter(),
@@ -72,34 +63,29 @@ export async function getPosts(pageSize = 10): Promise<Post[]> {
 export async function getAllPosts(): Promise<Post[]> {
   let results = []
 
-  if (blogIndexCache.exists()) {
-    results = blogIndexCache.get()
-    console.log('Found cached posts.')
-  } else {
-    const params = {
-      database_id: DATABASE_ID,
-      filter: _buildFilter(),
-      sorts: [
-        {
-          property: 'Date',
-          timestamp: 'created_time',
-          direction: 'descending',
-        },
-      ],
-      page_size: 100,
+  const params = {
+    database_id: DATABASE_ID,
+    filter: _buildFilter(),
+    sorts: [
+      {
+        property: 'Date',
+        timestamp: 'created_time',
+        direction: 'descending',
+      },
+    ],
+    page_size: 100,
+  }
+
+  while (true) {
+    const res: responses.QueryDatabaseResponse = await client.databases.query(params)
+
+    results = results.concat(res.results)
+
+    if (!res.has_more) {
+      break
     }
 
-    while (true) {
-      const res: responses.QueryDatabaseResponse = await client.databases.query(params)
-
-      results = results.concat(res.results)
-
-      if (!res.has_more) {
-        break
-      }
-
-      params['start_cursor'] = res.next_cursor
-    }
+    params['start_cursor'] = res.next_cursor
   }
 
   return results
@@ -108,21 +94,6 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 export async function getRankedPosts(pageSize = 10): Promise<Post[]> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts
-      .filter(post => !!post.Rank)
-      .sort((a, b) => {
-        if (a.Rank > b.Rank) {
-          return -1
-        } else if (a.Rank === b.Rank) {
-          return 0
-        }
-        return 1
-      })
-      .slice(0, pageSize)
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter([
@@ -150,11 +121,6 @@ export async function getRankedPosts(pageSize = 10): Promise<Post[]> {
 }
 
 export async function getPostsBefore(date: string, pageSize = 10): Promise<Post[]> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts.filter(post => post.Date < date).slice(0, pageSize)
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter([
@@ -183,11 +149,6 @@ export async function getPostsBefore(date: string, pageSize = 10): Promise<Post[
 }
 
 export async function getFirstPost(): Promise<Post|null> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts[allPosts.length - 1]
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter(),
@@ -215,11 +176,6 @@ export async function getFirstPost(): Promise<Post|null> {
 }
 
 export async function getPostBySlug(slug: string): Promise<Post|null> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts.find(post => post.Slug === slug)
-  }
-
   const res: responses.QueryDatabaseResponse = await client.databases.query({
     database_id: DATABASE_ID,
     filter: _buildFilter([
@@ -253,11 +209,6 @@ export async function getPostBySlug(slug: string): Promise<Post|null> {
 export async function getPostsByTag(tag: string | undefined, pageSize = 100): Promise<Post[]> {
   if (!tag) return []
 
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts.filter(post => post.Tags.includes(tag)).slice(0, pageSize)
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter([
@@ -290,15 +241,6 @@ export async function getPostsByTagBefore(
   date: string,
   pageSize = 100
 ): Promise<Post[]> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return allPosts
-      .filter(post => {
-        return post.Tags.includes(tag) && new Date(post.Date) < new Date(date)
-      })
-      .slice(0, pageSize)
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter([
@@ -333,12 +275,6 @@ export async function getPostsByTagBefore(
 }
 
 export async function getFirstPostByTag(tag: string): Promise<Post|null> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    const sameTagPosts = allPosts.filter(post => post.Tags.includes(tag))
-    return sameTagPosts[sameTagPosts.length - 1]
-  }
-
   const params = {
     database_id: DATABASE_ID,
     filter: _buildFilter([
@@ -410,8 +346,6 @@ export async function getAllBlocksByBlockId(blockId: string): Promise<Block[]> {
       block.SyncedBlock.Children = await _getSyncedBlockChildren(block)
     } else if (block.Type === 'toggle') {
       block.Toggle.Children = await getAllBlocksByBlockId(block.Id)
-    } else if (block.Type === 'child_page' && block.HasChildren) {
-      block.ChildPage.Children = await getAllBlocksByBlockId(block.Id)
     }
   }
 
@@ -434,14 +368,6 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
   }
 
   switch (blockObject.type) {
-    case 'child_page':
-      const childpage: ChildPage = {
-        Title: blockObject.child_page.title,
-        Children: [],
-      }
-
-      block.ChildPage = childpage
-      break
     case 'paragraph':
       const paragraph: Paragraph = {
         RichTexts: blockObject.paragraph.rich_text.map(_buildRichText),
@@ -506,8 +432,6 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
 
       if (blockObject.video.type === 'external') {
         video.External = { Url: blockObject.video.external.url }
-      } else {
-        video.File = { Url: blockObject.video.file.url }
       }
 
       block.Video = video
@@ -590,19 +514,6 @@ function _buildBlock(blockObject: responses.BlockObject): Block {
       }
 
       block.Embed = embed
-      break
-    case 'pdf':
-      const pdf: Pdf = {
-        Type: blockObject.pdf.type,
-      }
-
-      if (blockObject.pdf.type === 'file') {
-        pdf.File = { Url: blockObject.pdf.file.url }
-      } else {
-        pdf.External = { Url: blockObject.pdf.external.url }
-      }
-
-      block.Pdf = pdf
       break
     case 'bookmark':
       const bookmark: Bookmark = {
@@ -738,11 +649,6 @@ async function _getSyncedBlockChildren(block: Block): Promise<Block[]> {
 }
 
 export async function getAllTags(): Promise<string[]> {
-  if (blogIndexCache.exists()) {
-    const allPosts = await getAllPosts()
-    return [...new Set(allPosts.flatMap(post => post.Tags))].sort()
-  }
-
   const res: responses.RetrieveDatabaseResponse = await client.databases.retrieve({
     database_id: DATABASE_ID,
   })
@@ -788,7 +694,7 @@ function _uniqueConditions(conditions = []) {
   })
 }
 
-function _validPageObject(pageObject: responses.PageObject): boolean {
+export function _validPageObject(pageObject: responses.PageObject): boolean {
   const prop = pageObject.properties
   return (
     prop.Page.title.length > 0 &&
@@ -797,7 +703,7 @@ function _validPageObject(pageObject: responses.PageObject): boolean {
   )
 }
 
-function _buildPost(pageObject: responses.PageObject): Post {
+export function _buildPost(pageObject: responses.PageObject): Post {
   const prop = pageObject.properties
 
   const post: Post = {
@@ -813,7 +719,6 @@ function _buildPost(pageObject: responses.PageObject): Post {
     OGImage:
       prop.OGImage.files.length > 0 ? prop.OGImage.files[0].file.url : null,
     Rank: prop.Rank.number,
-    Like: prop.Like.number,
   }
 
   return post
@@ -852,46 +757,7 @@ function _buildRichText(richTextObject: responses.RichTextObject): RichText {
       Expression: richTextObject.equation.expression,
     }
     richText.Equation = equation
-  } else if (richTextObject.type === 'mention') {
-    if (richTextObject.mention.type === 'page') {
-      const mention: Mention = {
-        Type: richTextObject.mention.type
-      }
-      mention.Page = {
-        Id: richTextObject.mention.page.id
-      }
-      richText.Mention = mention
-    } else if (richTextObject.mention.type === 'date') {
-      const mention: Mention = {
-        Type: richTextObject.mention.type
-      }
-      mention.Date = {
-        Start: richTextObject.mention.date.start,
-        End: richTextObject.mention.date.end,
-      }
-      richText.Mention = mention
-    } else {
-      const mention: Mention = {
-        Type: richTextObject.mention.type
-      }
-      richText.Mention = mention
-    }
   }
 
   return richText
-}
-
-export async function incrementLikes(post:Post) {
-  const result = await client.pages.update({
-    page_id: post.PageId,
-    properties: {
-      'Like': (post.Like || 0) + 1,
-    },
-  })
-
-  if (!result) {
-    return null
-  }
-
-  return _buildPost(result)
 }
