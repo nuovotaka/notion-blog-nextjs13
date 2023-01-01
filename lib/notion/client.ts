@@ -719,6 +719,7 @@ export function _buildPost(pageObject: responses.PageObject): Post {
     OGImage:
       prop.OGImage.files.length > 0 ? prop.OGImage.files[0].file.url : null,
     Rank: prop.Rank.number,
+    Like: prop.Like.number,
   }
 
   return post
