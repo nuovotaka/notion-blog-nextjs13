@@ -37,7 +37,7 @@ const ApiOgImage = async function(req: NextRequest) {
             justifyContent: 'center',
           }}
         >
-          <img src={post.OGImage} />
+          <img src={post.OGImage} alt='OGImage'/>
         </div>
       ),
       {
