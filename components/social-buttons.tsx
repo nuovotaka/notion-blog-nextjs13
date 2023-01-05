@@ -9,6 +9,8 @@ import {
   PocketShareButton,
   TwitterIcon,
   TwitterShareButton,
+  LineShareButton,
+  LineIcon,
 } from 'react-share'
 
 import * as gtag from '../lib/gtag'
@@ -74,6 +76,21 @@ const SocialButtons = ({ title = '', url, id = null }) => (
       >
         <HatenaIcon size={32} round={true} />
       </HatenaShareButton>
+    </li>
+    <li>
+      <LineShareButton
+        url={url}
+        title={title}
+        beforeOnClick={() =>
+          gtag.share({
+            method: 'line',
+            contentType: 'article',
+            itemId: id,
+          })
+        }
+      >
+        <LineIcon size={32} round={true} />
+      </LineShareButton>
     </li>
   </ul>
 )
