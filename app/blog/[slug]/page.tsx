@@ -23,7 +23,7 @@ import {
   getPostsByTag,
   getAllTags,
   getAllBlocksByBlockId,
-} from '../../../lib/notion/client'
+} from '../../../lib/notion/client-through-cache'
 import TocLink from '../../../components/toc'
 
 export const revalidate = 30
