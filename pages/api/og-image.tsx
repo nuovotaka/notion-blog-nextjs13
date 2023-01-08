@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { ImageResponse } from '@vercel/og'
-import { getPostBySlug } from '../../lib/notion/client'
 import { NEXT_PUBLIC_SITE_TITLE } from '../../app/server-constants'
+import { Post } from '../../lib/notion/interfaces'
 
 export const config = { runtime: 'experimental-edge' }
 
@@ -18,7 +18,9 @@ const ApiOgImage = async function(req: NextRequest) {
 
   const slug = searchParams.get('slug')
 
-  const post = await getPostBySlug(slug)
+  const url = process.env.VERCEL === '1' ? `https://${process.env.VERCEL_URL}` : `http://localhost:${process.env.PORT || 3000}`
+
+  const post: Post = await (await fetch(new URL(`/api/posts/${slug}`, url))).json()
   if (!post) {
     throw new Error(`post not found. slug: ${slug}`)
   }
@@ -37,7 +39,7 @@ const ApiOgImage = async function(req: NextRequest) {
             justifyContent: 'center',
           }}
         >
-          <img src={post.OGImage} alt='OGImage'/>
+          <img src={post.OGImage} alt='og-image'/>
         </div>
       ),
       {
