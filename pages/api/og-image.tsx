@@ -61,9 +61,8 @@ const ApiOgImage = async function(req: NextRequest) {
           display: 'flex',
           backgroundColor: '#fff',
           backgroundSize: '100% 100%',
-          width: '100%',
-          height: '100%',
-          textAlign: 'left',
+          width: '1200px',
+          height: '630px',
           alignItems: 'flex-start',
           justifyContent: 'center',
           flexDirection: 'column',
@@ -73,44 +72,76 @@ const ApiOgImage = async function(req: NextRequest) {
         <div
           style={{
             display: 'flex',
-            width: '800px',
-            height: '380px',
-            margin: '70px auto 60px',
-            fontSize: 80,
-            fontStyle: 'normal',
-            color: '#333',
-            lineHeight: 1.3,
-            wordWrap: 'break-word',
-          }}
-        >
-          {post.Title.slice(0, 30)}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            width: '800px',
-            height: '60px',
-            margin: '0 35px 0',
-            fontSize: 48,
-            fontStyle: 'normal',
-            color: '#666',
-            lineHeight: 1.3,
-            wordWrap: 'break-word',
-          }}
-        >
-          ✏️ {NEXT_PUBLIC_SITE_TITLE}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            width: '1000px',
-            height: '100px',
+            backgroundColor: '#fff',
+            backgroundSize: '100% 100%',
+            width: '1140px',
+            height: '570px',
             margin: 'auto',
+            borderRadius: '28px',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
           }}
         >
-          <img src={`data:image/svg+xml,${encodeURIComponent(logoNT)}`} width={72} height={72} alt="logo" />
+          <div
+            style={{
+              display: 'flex',
+              backgroundColor: '#fff',
+              width: '1040px',
+              height: '490px',
+              margin: 'auto',
+              fontSize: '78px',
+              textAlign: 'left',
+              lineHeight: '130%',
+              overflow: 'hidden',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              flexWrap: 'nowrap',
+            }}
+          >
+            {post.Title}
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              backgroundColor: '#fff',
+              width: '1040px',
+              height: '100px',
+              margin: 'auto',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                backgroundColor: '#fff',
+                width: '640px',
+                height: '64px',
+                margin: 'auto',
+                fontSize: '42px',
+                color: '#555',
+                overflow: 'hidden',
+              }}
+            >
+              ✏️ {NEXT_PUBLIC_SITE_TITLE}
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                width: '150px',
+                height: '100px',
+                margin: 'auto',
+              }}
+            >
+              <img src={`data:image/svg+xml,${encodeURIComponent(logoNT)}`} width={72} height={72} alt="logo" />
+            </div>
+          </div>
         </div>
       </div>
     ),
