@@ -229,29 +229,51 @@ const ColumnList = ({ block, headings }) => (
   </div>
 )
 
-const List = ({ block }) => {
+const List = ({ block, headings, level = 0 }) => {
   if (block.Type === 'bulleted_list') {
     return (
       <ul>
-        <BulletedListItems blocks={block.ListItems} />
+        <BulletedListItems blocks={block.ListItems} headings={headings} />
       </ul>
     )
   } else if (block.Type == 'numbered_list') {
     return (
-      <ol>
-        <NumberedListItems blocks={block.ListItems} />
-      </ol>
+      level % 3 === 0 ? (
+        <ol type="1">
+          <NumberedListItems
+            blocks={block.ListItems}
+            level={level}
+            headings={headings}
+          />
+        </ol>
+      ) : level % 3 === 1 ? (
+        <ol type="a">
+          <NumberedListItems
+            blocks={block.ListItems}
+            level={level}
+            headings={headings}
+          />
+        </ol>
+      ) : (
+        <ol type="i">
+          <NumberedListItems
+            blocks={block.ListItems}
+            level={level}
+            headings={headings}
+          />
+        </ol>
+      )
     )
   }
 
   return (
     <div className={styles.toDo}>
-      <ToDoItems blocks={block.ListItems} />
+      <ToDoItems blocks={block.ListItems} headings={headings} />
     </div>
   )
 }
 
-const BulletedListItems = ({ blocks }) =>
+const BulletedListItems = ({ blocks, headings }) =>
   blocks
     .filter((b: interfaces.Block) => b.Type === 'bulleted_list_item')
     .map((listItem: interfaces.Block) => (
@@ -266,14 +288,12 @@ const BulletedListItems = ({ blocks }) =>
           />
         ))}
         {listItem.HasChildren ? (
-          <ul>
-            <ListBlocks blocks={listItem.BulletedListItem.Children} />
-          </ul>
+          <NotionBlocks blocks={listItem.BulletedListItem.Children} headings={headings} />
         ) : null}
       </li>
     ))
 
-const NumberedListItems = ({ blocks }) =>
+const NumberedListItems = ({ blocks, level = 1, headings }) =>
   blocks
     .filter((b: interfaces.Block) => b.Type === 'numbered_list_item')
     .map((listItem: interfaces.Block) => (
@@ -288,16 +308,12 @@ const NumberedListItems = ({ blocks }) =>
           />
         ))}
         {listItem.HasChildren ? (
-            <ol type="1">
-              <ListBlocks
-                blocks={listItem.NumberedListItem.Children}
-              />
-            </ol>
+          <NotionBlocks blocks={listItem.NumberedListItem.Children} level={level + 1} headings={headings} />
         ) : null}
       </li>
     ))
 
-const ToDoItems = ({ blocks }) =>
+const ToDoItems = ({ blocks, headings }) =>
   blocks
     .filter((b: interfaces.Block) => b.Type === 'to_do')
     .map((listItem: interfaces.Block) => (
@@ -312,9 +328,7 @@ const ToDoItems = ({ blocks }) =>
         ))}
         </span>
         {listItem.HasChildren ? (
-          <ul>
-            <ListBlocks blocks={listItem.ToDo.Children} />
-          </ul>
+          <NotionBlocks blocks={listItem.ToDo.Children} headings={headings} />
         ) : null}
       </div>
     ))
@@ -334,7 +348,7 @@ const Toggle = ({ block }) => (
   </details>
 )
 
-const NotionBlock = ({ block, headings }) => {
+const NotionBlock = ({ block, level, headings }) => {
   if (block.Type === 'child_page') {
     return <ChildPage block={block} />
   } else if (block.Type === 'paragraph') {
@@ -372,7 +386,7 @@ const NotionBlock = ({ block, headings }) => {
   } else if (block.Type === 'column_list') {
     return <ColumnList block={block} headings={headings} />
   } else if (block.Type === 'bulleted_list' || block.Type === 'numbered_list' || block.Type === 'to_do') {
-    return <List block={block} />
+    return <List block={block} level={level} headings={headings} />
   } else if (block.Type === 'synced_block') {
     return <SyncedBlock block={block} />
   } else if (block.Type === 'toggle') {
@@ -382,7 +396,7 @@ const NotionBlock = ({ block, headings }) => {
   return null
 }
 
-const NotionBlocks = ({ blocks, isRoot = false, headings = [] }) => {
+const NotionBlocks = ({ blocks, isRoot = false, level = 0, headings = [] }) => {
   let topLevelHeadings = headings
   if (isRoot) {
     topLevelHeadings = blocks.filter((b: interfaces.Block) => b.Type === 'heading_1' || b.Type === 'heading_2' || b.Type === 'heading_3')
@@ -391,19 +405,11 @@ const NotionBlocks = ({ blocks, isRoot = false, headings = [] }) => {
   return (
     <>
       {wrapListItems(blocks).map((block: interfaces.Block, i: number) => (
-        <NotionBlock block={block} headings={topLevelHeadings} key={`block-${i}`} />
+        <NotionBlock block={block} level={level} headings={topLevelHeadings} key={`block-${i}`} />
       ))}
     </>
   )
 }
-
-const ListBlocks = ({ blocks }) => (
-  <>
-    {wrapListItems(blocks).map((block: interfaces.Block, i: number) => (
-      <NotionBlock block={block} blocks={blocks} key={`block-${i}`} />
-    ))}
-  </>
-)
 
 const wrapListItems = (blocks: Array<interfaces.Block>) =>
   blocks.reduce((arr, block: interfaces.Block, i: number) => {
