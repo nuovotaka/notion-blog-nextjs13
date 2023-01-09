@@ -216,7 +216,6 @@ export interface RichText {
   PlainText: string
   Href?: string
   Equation?: Equation
-  Mention?: Mention
 }
 
 export interface Text {

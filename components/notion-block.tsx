@@ -9,7 +9,6 @@ import ImageBlock from './notion-blocks/image-block'
 import InlineEquation from './notion-blocks/inline-equation'
 import BlockEquation from './notion-blocks/block-equation'
 import Pdf from './notion-blocks/pdf'
-import InlineMention from './notion-blocks/inline-mention'
 
 import styles from '../styles/notion-block.module.scss'
 
@@ -20,7 +19,7 @@ const RichText = ({ richText }) => {
   } else if (richText.Equation) {
     element = <InlineEquation equation={richText.Equation} />
   } else {
-    element = <InlineMention mention={richText} />
+    element = null
   }
 
   if (richText.Annotation.Bold) {
