@@ -51,7 +51,7 @@ const ApiOgImage = async function(req: NextRequest) {
     )
   }
 
-  const fontURL = new URL('../../assets/NotoSansJP-Medium.woff', import.meta.url)
+  const fontURL = new URL('../../assets/HigashiOmeGochic.woff', import.meta.url)
   const fontData = await (await fetch(fontURL)).arrayBuffer()
 
   return new ImageResponse(
@@ -150,7 +150,7 @@ const ApiOgImage = async function(req: NextRequest) {
       height: 630,
       fonts: [
         {
-          name: 'NotoSansJP',
+          name: 'HigashiOmeGochic',
           data: fontData,
           style: 'normal',
         },
