@@ -310,7 +310,9 @@
 }
 
 .toggle> {
-  summary {
+  padding: 0.4rem;
+
+  >summary {
     cursor: pointer;
 
     >a {
@@ -324,7 +326,7 @@
     }
   }
 
-  div {
+  >div {
     margin-left: 1em;
   }
 }
