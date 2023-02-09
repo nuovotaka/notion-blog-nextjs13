@@ -3,7 +3,7 @@
 .container {
   display: flex;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     display: block;
   }
 
@@ -13,7 +13,7 @@
 .mainContent {
   width: 60%;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     width: 100%;
   }
 
@@ -26,7 +26,7 @@
     border-top: 1px dashed #888;
     margin: 0 auto;
 
-    @include m.mq(enb) {
+    @include m.mq(enb2) {
       margin: 0 auto 40px;
     }
 
@@ -55,7 +55,7 @@
 .subContent {
   width: 35%;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     width: 100%;
   }
 }

@@ -112,7 +112,7 @@ h1 {
   color: var(--fg);
   font-size: 2rem;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     font-size: 1.6rem;
   }
 
@@ -125,7 +125,7 @@ h3 {
   color: var(--fg);
   font-size: 1.2rem;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     font-size: 1.15rem;
   }
 
