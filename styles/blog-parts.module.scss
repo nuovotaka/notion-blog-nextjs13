@@ -15,7 +15,7 @@
 
 .postTitle {
   font-size: 1.6rem;
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     font-size: 1.2rem;
   }
   color: var(--fg);
@@ -23,7 +23,7 @@
   a {
     display: block;
     font-size: 1.2rem;
-    @include m.mq(enb) {
+    @include m.mq(enb2) {
       font-size: 1.15rem;
     }
     color: inherit;
@@ -45,7 +45,7 @@
   a {
     display: block;
     width: 30%;
-    @include m.mq(enb) {
+    @include m.mq(enb2) {
       width: 50%;
     }
     margin: 1rem auto 0;
@@ -64,7 +64,7 @@
 
   a {
     width: 30%;
-    @include m.mq(enb) {
+    @include m.mq(enb2) {
       width: 50%;
     }
     margin: 0 auto;
@@ -85,6 +85,7 @@
     list-style-type: none;
     padding: 0;
     margin-top: 0.3rem;
+    margin-block-end: 1rem;
 
     li {
       position: relative;
@@ -120,6 +121,7 @@
     list-style: none;
     padding: 0;
     margin-top: 0.3rem;
+    margin-block-end: 1rem;
 
     li {
       box-sizing: border-box;
@@ -151,7 +153,7 @@
 
 .postsNotFound {}
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .tag {
     font-size: 0.75rem;
     padding-right: 0.75rem;

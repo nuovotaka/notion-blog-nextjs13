@@ -112,7 +112,7 @@ h1 {
   color: var(--fg);
   font-size: 2rem;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     font-size: 1.6rem;
   }
 
@@ -125,22 +125,24 @@ h3 {
   color: var(--fg);
   font-size: 1.2rem;
 
-  @include m.mq(enb) {
+  @include m.mq(enb2) {
     font-size: 1.15rem;
   }
 
   font-weight: 700;
 }
 
-ol {
+p {
   color: var(--listitem-color);
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.8rem;
 }
 
-p,
-ul {
+ul,
+ol {
+  margin: 0;
+  padding-inline-start: 1.5rem;
   color: var(--listitem-color);
   font-weight: 400;
   font-size: 1rem;
